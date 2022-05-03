@@ -1,0 +1,22 @@
+version: '3.5'
+services:
+  qecentralapi:
+    image: registry.bill24.net:60050/h602/qecentralapi
+    ports:
+      - 60077:8000
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+    environment:
+      - DATABASE_URI=postgresql+psycopg2://postgres:underadmin@192.168.3.7:5432/qe_central
+  queue_status_runner:
+    image: registry.bill24.net:60050/h602/queue_status_runner
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+    environment:
+      - DATABASE_URI=postgresql+psycopg2://postgres:underadmin@192.168.3.7:5432/qe_central

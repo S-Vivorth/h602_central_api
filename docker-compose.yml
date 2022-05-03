@@ -1,0 +1,13 @@
+version: '3.5'
+
+services:
+  qecentralapi:
+      build:
+        context: .
+        dockerfile: ./Dockerfile
+      image: registry.bill24.net:60050/h602/qecentralapi
+  queue_status_runner:
+      image: registry.bill24.net:60050/h602/queue_status_runner
+      build:
+        context: .
+        dockerfile: ./h602_central/get_queue_status_runner/Dockerfile
